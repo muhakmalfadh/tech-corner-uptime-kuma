@@ -1,4 +1,3 @@
-````markdown
 # WordPress and Uptime Kuma with Docker
 
 This project uses Docker to run a WordPress instance, a MySQL database for WordPress, and an Uptime Kuma monitoring service. This README provides the necessary steps to get started, manage the services, and clean up the environment.

@@ -1,0 +1,42 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1.23.16-debian
+    container_name: uptime-kuma
+    volumes:
+      - uptime-kuma-data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "3001:3001"
+    restart: always
+
+  mysql:
+    image: mysql:8.4.5
+    container_name: wordpress-db
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "root_password"
+      MYSQL_DATABASE: "wordpress"
+      MYSQL_USER: "wordpress"
+      MYSQL_PASSWORD: "wordpress_password"
+
+  wordpress:
+    image: wordpress:6.8.2-php8.4-apache
+    container_name: wordpress-app
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: "wordpress-db:3306"
+      WORDPRESS_DB_USER: "wordpress"
+      WORDPRESS_DB_PASSWORD: "wordpress_password"
+      WORDPRESS_DB_NAME: "wordpress"
+
+volumes:
+  uptime-kuma-data:
+  db_data:

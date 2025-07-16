@@ -67,6 +67,3 @@ docker-compose down --volumes
   * `--volumes`: This flag removes the named volumes (`db_data` and `uptime-kuma-data`) that were created to persist data. **Warning: This will permanently delete your WordPress database and Uptime Kuma data.** If you want to keep the data, omit the `--volumes` flag.
 
 <!-- end list -->
-
-```
-```
